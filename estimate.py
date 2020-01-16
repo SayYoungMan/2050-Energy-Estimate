@@ -17,6 +17,18 @@ def normalise(data):
 	data = (data-mean)/std
 	return mean, std, data
 
+def regression(year, predyear, consumption, tolerance):
+	input = 1
+	output = 1
+	hidden = 50
+	layers = [('F', hidden), ('AF', 'tanh'), ('F', hidden), ('AF', 'tanh'), ('F', hidden), ('AF', 'tanh'), ('F', hidden), ('AF', 'tanh'), ('F', output)]
+	mlpr = ANNR([input], layers, batchSize = 64, maxIter = 25000, tol = tolerance, reg = 1e-4, verbose = True)
+	holdYears = 5
+	totalYears = len(year)
+	mlpr.fit(year[0:(totalYears-holdYears)], consumption[0:(totalYears-holdYears)])
+	predicted = mlpr.predict(predyear)
+	return predicted
+
 #Read CSV file
 df = pd.read_csv('MER_T07_01.csv')
 #Choose only desired consumption type
@@ -34,6 +46,7 @@ predyear = np.reshape(predyear, (-1, 1))
 predyear_scaled = (predyear-year_mean)/year_std
 print('Finished Reading Data')
 
+'''
 #Number of neurons in the input, output, and hidden layers
 input = 1
 output = 1
@@ -57,6 +70,11 @@ mlpr3.fit(year_scaled[0:(totalYears-holdYears)], consumption_scaled[0:(totalYear
 predict1 = mlpr1.predict(predyear_scaled)
 predict2 = mlpr2.predict(predyear_scaled)
 predict3 = mlpr3.predict(predyear_scaled)
+'''
+
+predict1 = regression(year_scaled, predyear_scaled, consumption_scaled, 0.012)
+predict2 = regression(year_scaled, predyear_scaled, consumption_scaled, 0.011)
+predict3 = regression(year_scaled, predyear_scaled, consumption_scaled, 0.01)
 
 predict1 = (predict1*consumption_std)+consumption_mean
 predict2 = (predict2*consumption_std)+consumption_mean
