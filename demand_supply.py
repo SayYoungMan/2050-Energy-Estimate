@@ -30,8 +30,8 @@ low_demand = pd.read_csv('Low-demand.csv').to_numpy()
 wma = pd.read_csv('Waxman-Markey Analysis.csv').to_numpy()
 
 plt.plot(year, consumption)
-plt.plot(predyear, total)
-plt.plot(demand_year, low_demand)
+#plt.plot(predyear, total)
+plt.plot(demand_year, baseline)
 #No individual plot but stackplot instead
 '''
 plt.plot(predyear, coal)
@@ -44,6 +44,6 @@ plt.stackplot(predyear, re, ng, nc, coal, etc)
 plt.xlabel('Year')
 plt.ylabel('Net Electricity Generation (TWh)')
 plt.title('Estimation of Effect of Retirement')
-plt.legend(['Actual Data', 'Total Supply', 'Total Demand', 'Renewable', 'Natural Gas', 'Nuclear', 'Coal', 'Others'])
+plt.legend(['Actual Data', 'Total Demand', 'Renewable', 'Natural Gas', 'Nuclear', 'Coal', 'Others'])
 plt.axvline(2018, linestyle='--')
 plt.show()
