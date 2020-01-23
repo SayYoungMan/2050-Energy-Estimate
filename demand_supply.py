@@ -39,10 +39,10 @@ plt.plot(predyear, ng)
 plt.plot(predyear, re)
 plt.plot(predyear, nc)
 '''
-plt.stackplot(predyear, re, ng, nc, coal, etc)
+plt.stackplot(predyear, re, ng, nc, coal, etc, colors = ['#8ead47', '#2bc4a3', '#c94a6a', '#787878', '#bebebe'])
 
 plt.xlabel('Year')
-plt.ylabel('Net Electricity Generation (TWh)')
+plt.ylabel('Annual Electricity Generation (TWh)')
 plt.title('Estimation of Effect of Retirement')
 plt.legend(['Actual Data', 'Total Demand', 'Renewable', 'Natural Gas', 'Nuclear', 'Coal', 'Others'])
 plt.axvline(2018, linestyle='--')
