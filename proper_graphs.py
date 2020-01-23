@@ -11,7 +11,7 @@ em3 = pd.read_excel('Graph Data/TEP - Graphs III.xlsx', sheet_name = 'ALL PLOTS'
 eg4 = pd.read_excel('Graph Data/TEP - Graphs III.xlsx', sheet_name = 'ALL PLOTS', skiprows = 359, nrows = 15, usecols = 'H:AM')
 em4 = pd.read_excel('Graph Data/TEP - Graphs III.xlsx', sheet_name = 'ALL PLOTS', skiprows = 379, nrows = 15, usecols = 'H:AM')
 em_total = pd.read_excel('Graph Data/TEP - Graphs III.xlsx', sheet_name = 'ALL PLOTS', skiprows = 408, nrows = 15, usecols = 'H:AM')
-eg_total = pd.read_excel('Graph Data/TEP - Graphs III.xlsx', sheet_name = 'ALL PLOTS', skiprows = 416, nrows = 15, usecols = 'H:AM')
+cap_total = pd.read_excel('Graph Data/TEP - Graphs III.xlsx', sheet_name = 'ALL PLOTS', skiprows = 416, nrows = 15, usecols = 'H:AM')
 
 def eg_divide1(ds):
 	coal = ds.loc[0].to_numpy().reshape(-1)
@@ -63,6 +63,7 @@ def total_plot(ds, col, ylabel, title):
 	plt.xlabel('Year', fontsize = 14)
 	plt.ylabel(ylabel, fontsize = 14)
 	plt.title(title, fontsize = 18)
+	plt.legend(['Scenario 1', 'Scenario 2', 'Scenario 3', 'Scenario 4'])
 	plt.show()
 
 def eg_plot1(ds):
@@ -81,6 +82,7 @@ def eg_plot1(ds):
 		'Wind - Offshore', 'Nuclear', 'Geothermal', 'Biomass', 'Hydroelectric', 'Others'], loc='center left', bbox_to_anchor=(1, 0.5),
           fancybox=True, fontsize = 16)
 	plt.tick_params(labelsize = 18)
+	plt.tight_layout()
 	plt.show()
 
 def eg_plot(ds, title):
@@ -99,6 +101,7 @@ def eg_plot(ds, title):
 		'Wind - Offshore', 'Nuclear', 'Geothermal', 'Biomass', 'Hydroelectric', 'Others'], loc='center left', bbox_to_anchor=(1, 0.5),
           fancybox=True, fontsize = 16)
 	plt.tick_params(labelsize = 18)
+	plt.tight_layout()
 	plt.show()
 
 def em_plot1(ds, hist):
@@ -123,6 +126,7 @@ def em_plot1(ds, hist):
 		plt.legend(['Coal', 'Coal with CCS', 'Gas - CT', 'Gas - CC', 'Solar - PV', 'Solar - CSP', 'Wind - Onshore',\
 		'Wind - Offshore', 'Nuclear', 'Geothermal', 'Biomass', 'Hydroelectric', 'Others'], loc='center left', bbox_to_anchor=(1, 0.5),
           fancybox=True, fontsize = 16)
+	plt.tight_layout()
 	plt.show()
 
 def em_plot(ds, title, hist):
@@ -147,17 +151,20 @@ def em_plot(ds, title, hist):
 		plt.legend(['Coal', 'Coal with CCS', 'Gas - CT', 'Gas - CC', 'Gas - CC with CCS', 'Solar - PV', 'Solar - CSP', 'Wind - Onshore',\
 		'Wind - Offshore', 'Nuclear', 'Geothermal', 'Biomass', 'Hydroelectric', 'Others'], loc='center left', bbox_to_anchor=(1, 0.5),
           fancybox=True, fontsize = 16)
+	plt.tight_layout()
 	plt.show()
 
 '''
 eg_plot1(eg1)
 eg_plot(eg2, 'Electricity Generation - Scenario 2')
 eg_plot(eg3, 'Electricity Generation - Scenario 3')
-eg_plot(eg4, 'Electricity Generation - Scenario 4')
+eg_plot(eg4, 'Electricity Generation - Scenario 4')'''
+
+
 em_plot1(em1, hist = False)
 em_plot(em2, 'Total Emissions - Scenario 2', hist = False)
 em_plot(em3, 'Total Emissions - Scenario 3', hist = False)
 em_plot(em4, 'Total Emissions - Scenario 4', hist = False)
-'''
+
 #total_plot(em_total, ['#c1d4b7', '#99b880', '#769e4f','#5d8541'], 'Total Annual Emissions (MMt CO2e)', 'Comparison of Emissions')
-total_plot(eg_total, ['#c1d4b7', '#99b880', '#769e4f','#5d8541'], 'Total Annual Emissions (MMt CO2e)', 'Comparison of Emissions')
+#total_plot(cap_total, ['#f8d18e', '#f6c042', '#daaa3a','#ba902f'], 'Cumulative Capital Investment (Million USD)', 'Comparison of CapEx')
